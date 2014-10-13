@@ -513,7 +513,10 @@ int TWFunc::tw_reboot(RebootCommand command)
 {
 	// Always force a sync before we reboot
 	sync();
-
+#ifdef TW_EXTERNAL_STORAGE_PATH
+	PartitionManager.UnMount_By_Path(EXPAND(TW_EXTERNAL_STORAGE_PATH), true);
+#endif
+	
 	switch (command) {
 		case rb_current:
 		case rb_system:
